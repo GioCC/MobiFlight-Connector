@@ -416,6 +416,11 @@
     </Compile>
     <Compile Include="UI\Panels\Config\HubHopPresetPanel.Designer.cs">
       <DependentUpon>HubHopPresetPanel.cs</DependentUpon>
+    <Compile Include="UI\Panels\Config\PinAssignPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Panels\Config\PinAssignPanel.Designer.cs">
+      <DependentUpon>PinAssignPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Panels\Config\PreconditionPanel.cs">
       <SubType>UserControl</SubType>
@@ -1080,6 +1085,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Panels\Config\ActionTypePanel.de.resx">
       <DependentUpon>ActionTypePanel.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Panels\Config\PinAssignPanel.resx">
+      <DependentUpon>PinAssignPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Panels\Config\ConfigRefPanel.de.resx">
       <DependentUpon>ConfigRefPanel.cs</DependentUpon>
