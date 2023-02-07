@@ -13,6 +13,12 @@ namespace MobiFlight
         public bool isPWM = false;
         [XmlAttribute]
         public bool isI2C = false;
+
+        // Should this be serialized? Its validity depends on the configuration
+        [XmlAttribute]
+        public byte Channel { get; set; } = 255;
+        // Should derived pins be a subclass?    
+
         // This is internal state and shouldn't be serialized to/from the .board.xml files
         public bool Used = false;
 
@@ -42,6 +48,11 @@ namespace MobiFlight
         public bool ShouldSerializeName()
         {
             return !string.IsNullOrEmpty(name);
+        }
+
+        public bool isDerived()
+        {
+            return Channel != 255;
         }
 
         public override String ToString()
