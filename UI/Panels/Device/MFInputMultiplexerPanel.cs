@@ -10,7 +10,7 @@ namespace MobiFlight.UI.Panels.Settings
         private List<MobiFlightPin> pinList;    // COMPLETE list of pins (includes status)
         private bool                initialized;
         private bool                firstMuxed;
-        private InputMultiplexer         inputMultiplexer;
+        private InputMultiplexer    inputMultiplexer;
         private MFMultiplexerDriverSubPanel selectorPanel; 
         
         private int MAX_MODULES = 2;            // Only possible values: 1 module for HCT4051, 2 for HCT4067

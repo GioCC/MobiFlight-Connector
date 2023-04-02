@@ -38,6 +38,10 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.mfEncoderTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.cbPin1IsMux = new System.Windows.Forms.CheckBox();
+            this.cbPin2IsMux = new System.Windows.Forms.CheckBox();
+            this.cbMuxPin1 = new System.Windows.Forms.ComboBox();
+            this.cbMuxPin2 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -45,6 +49,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbMuxPin2);
+            this.groupBox1.Controls.Add(this.cbMuxPin1);
+            this.groupBox1.Controls.Add(this.cbPin2IsMux);
+            this.groupBox1.Controls.Add(this.cbPin1IsMux);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.mfRightPinComboBox);
             this.groupBox1.Controls.Add(this.mfPinLabel);
@@ -112,6 +120,44 @@
             this.mfEncoderTypeComboBox.Name = "mfEncoderTypeComboBox";
             this.mfEncoderTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.value_Changed);
             // 
+            // cbPin1IsMux
+            // 
+            resources.ApplyResources(this.cbPin1IsMux, "cbPin1IsMux");
+            this.cbPin1IsMux.Name = "cbPin1IsMux";
+            this.cbPin1IsMux.UseVisualStyleBackColor = true;
+            this.cbPin1IsMux.CheckedChanged += new System.EventHandler(this.cbPin1IsMux_CheckedChanged);
+            // 
+            // cbPin2IsMux
+            // 
+            resources.ApplyResources(this.cbPin2IsMux, "cbPin2IsMux");
+            this.cbPin2IsMux.Name = "cbPin2IsMux";
+            this.cbPin2IsMux.UseVisualStyleBackColor = true;
+            this.cbPin2IsMux.CheckedChanged += new System.EventHandler(this.cbPin2IsMux_CheckedChanged);
+            // 
+            // cbMuxPin1
+            // 
+            this.cbMuxPin1.FormattingEnabled = true;
+            this.cbMuxPin1.Items.AddRange(new object[] {
+            resources.GetString("cbMuxPin1.Items"),
+            resources.GetString("cbMuxPin1.Items1"),
+            resources.GetString("cbMuxPin1.Items2"),
+            resources.GetString("cbMuxPin1.Items3"),
+            resources.GetString("cbMuxPin1.Items4")});
+            resources.ApplyResources(this.cbMuxPin1, "cbMuxPin1");
+            this.cbMuxPin1.Name = "cbMuxPin1";
+            // 
+            // cbMuxPin2
+            // 
+            this.cbMuxPin2.FormattingEnabled = true;
+            this.cbMuxPin2.Items.AddRange(new object[] {
+            resources.GetString("cbMuxPin2.Items"),
+            resources.GetString("cbMuxPin2.Items1"),
+            resources.GetString("cbMuxPin2.Items2"),
+            resources.GetString("cbMuxPin2.Items3"),
+            resources.GetString("cbMuxPin2.Items4")});
+            resources.ApplyResources(this.cbMuxPin2, "cbMuxPin2");
+            this.cbMuxPin2.Name = "cbMuxPin2";
+            // 
             // MFEncoderPanel
             // 
             resources.ApplyResources(this, "$this");
@@ -121,6 +167,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "MFEncoderPanel";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -140,5 +187,9 @@
         private System.Windows.Forms.ComboBox mfRightPinComboBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox mfEncoderTypeComboBox;
+        private System.Windows.Forms.ComboBox cbMuxPin2;
+        private System.Windows.Forms.ComboBox cbMuxPin1;
+        private System.Windows.Forms.CheckBox cbPin2IsMux;
+        private System.Windows.Forms.CheckBox cbPin1IsMux;
     }
 }
