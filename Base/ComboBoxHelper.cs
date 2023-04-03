@@ -86,18 +86,16 @@ namespace System
         }
         static public void reassignPin(ComboBox comboBox, List<MobiFlightPin> pinList, ref string signalPin)
         {
-            // This function updates the config data (signalPin) with the new value read from the ComboBox.
-            // At the same time:
-            // - the assignment flags in the "base" pin list are accordingly updated (the current pin no. is marked as free
-            //   and the new one as used)
-            // - an updated pin list is associated to the ComboBox
+            // This function:
+            // - reads the pin value selected from the ComboBox as new value;
+            // - in pinList, marks the current value of signalPin as free and the new value as used;
+            // - assigns the new value to signalPin;
+            // - updates the ComboBox list with the contents of the updated pinList.
             string after = comboBox.SelectedItem.ToString();
             byte nBefore = byte.Parse(signalPin);
             byte nAfter = byte.Parse(after);
             try {
                 if (signalPin != after) {
-                    // Pin 0 is used for the stepper.
-                    // But Pin 0 is not a correct Pin for the Mega.
                     if (pinList.Find(x => x.Pin == nBefore)!=null)
                         pinList.Find(x => x.Pin == nBefore).Used = false;
                     if (pinList.Find(x => x.Pin == nAfter)!=null)

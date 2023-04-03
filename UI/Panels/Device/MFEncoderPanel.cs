@@ -13,7 +13,7 @@ namespace MobiFlight.UI.Panels.Settings.Device
     {
 
         private MobiFlight.Config.Encoder encoder;
-        private List<MobiFlightPin> pinList;    // COMPLETE list of pins (includes status)
+        private List<MobiFlightPin> modulePinList;    // COMPLETE list of pins (includes status)
         private bool initialized = false;
 
         public event EventHandler Changed;
@@ -32,7 +32,7 @@ namespace MobiFlight.UI.Panels.Settings.Device
 
         public MFEncoderPanel(MobiFlight.Config.Encoder encoder, List<MobiFlightPin> Pins) : this()
         {
-            pinList = Pins;
+            modulePinList = Pins;
             this.encoder = encoder;
             ComboBoxHelper.SetSelectedItemByIndex(mfEncoderTypeComboBox, int.Parse(encoder.EncoderType));
             textBox1.Text = encoder.Name;
@@ -83,14 +83,14 @@ namespace MobiFlight.UI.Panels.Settings.Device
                     mfLeftPinComboBox.SelectedValue = byte.Parse(encoder.PinLeft);
 
                 } else {
-                    ComboBoxHelper.BindMobiFlightFreePins(mfLeftPinComboBox, pinList, encoder.PinLeft);
+                    ComboBoxHelper.BindMobiFlightFreePins(mfLeftPinComboBox, modulePinList, encoder.PinLeft);
                 }
             } else { 
                 if (isOnMux(encoder, 1)) {
                     //... fill mfRightPinComboBox with values 0...7 (or 0..15) depending on mux type
                     mfLeftPinComboBox.SelectedValue = byte.Parse(encoder.PinRight);
                 } else {
-                    ComboBoxHelper.BindMobiFlightFreePins(mfRightPinComboBox, pinList, encoder.PinRight);
+                    ComboBoxHelper.BindMobiFlightFreePins(mfRightPinComboBox, modulePinList, encoder.PinRight);
                 }
             }
             initialized = exInitialized;
@@ -112,7 +112,7 @@ namespace MobiFlight.UI.Panels.Settings.Device
                 if (isOnMux(encoder, 0)) {
                     //... should not check overlap, thus [free + re-occupy] is not required?
                 } else { 
-                    ComboBoxHelper.reassignPin(comboBox, pinList, ref encoder.PinLeft);
+                    ComboBoxHelper.reassignPin(comboBox, modulePinList, ref encoder.PinLeft);
                     // ReassignChannelPin is probably not necessary?
                     // ComboBoxHelper.reassignChannelPin(mfLeftPinComboBox, pinList, ref encoder.PinLeft, ref encoder.PinLeftSel); 
                 }
@@ -123,7 +123,7 @@ namespace MobiFlight.UI.Panels.Settings.Device
                 if (isOnMux(encoder, 1)) {
                     //... should not check overlap, thus [free + re-occupy] is not required?
                 } else { 
-                    ComboBoxHelper.reassignPin(comboBox, pinList, ref encoder.PinRight);
+                    ComboBoxHelper.reassignPin(comboBox, modulePinList, ref encoder.PinRight);
                     // ComboBoxHelper.reassignChannelPin(mfRightPinComboBox, pinList, ref encoder.PinRight, ref encoder.PinRightSel); 
                 }
                 // update the other too 
@@ -150,7 +150,7 @@ namespace MobiFlight.UI.Panels.Settings.Device
             bool newStatus = (sender as CheckBox).Checked;
             if (newStatus == true) {
                 // Was non-mux: free old pin
-                MobiFlightPin newPin = pinList.Find(x => x.Pin == Byte.Parse(encoder.PinLeft));
+                MobiFlightPin newPin = modulePinList.Find(x => x.Pin == Byte.Parse(encoder.PinLeft));
                 if (newPin != null) {
                     newPin.Used = false;
                 } else {
@@ -165,7 +165,7 @@ namespace MobiFlight.UI.Panels.Settings.Device
             } else {
                 // Was mux: nothing to free there;
                 // Find first free pin in pinList and assign it:
-                MobiFlightPin newPin = pinList.Find(x => x.Used == false);
+                MobiFlightPin newPin = modulePinList.Find(x => x.Used == false);
                 if(newPin != null) {
                     encoder.PinLeft = newPin.Pin.ToString();
                     encoder.PinLeftSel = "-1";
@@ -174,7 +174,7 @@ namespace MobiFlight.UI.Panels.Settings.Device
                     // what can we do?
                 }
                 // Repopulate pin list
-                ComboBoxHelper.BindMobiFlightFreePins(mfLeftPinComboBox, pinList, encoder.PinLeft);
+                ComboBoxHelper.BindMobiFlightFreePins(mfLeftPinComboBox, modulePinList, encoder.PinLeft);
             }
             UpdateFreePinsInDropDown(1);
         }
