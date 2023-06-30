@@ -83,22 +83,21 @@ namespace System
             
             return false;
         }
-        static public void reassignPin(ComboBox comboBox, List<MobiFlightPin> pinList, ref string currentPin)
+        static public void reassignPin(string newPin, List<MobiFlightPin> pinList, ref string currentPin)
         {
-            // This function updates the config data (currentPin) with the new value read from the ComboBox.
+            // This function updates the config data (currentPin) with the new value passed.
             // It does not deal with the ComboBox value set update; this has to be done by the caller.
             // The assignment flags in the "base" pin list are accordingly updated (the current pin no. 
             // is marked as free and the new one as used)
-            string newPin = comboBox.SelectedItem.ToString();
             byte nBefore = byte.Parse(currentPin);
             byte nAfter = byte.Parse(newPin);
             try {
                 if (currentPin != newPin) {
                     // Pin 0 is used for the stepper.
                     // But Pin 0 is not a correct Pin for the Mega.
-                    if (pinList.Find(x => x.Pin == nBefore)!=null)
+                    if (pinList.Find(x => x.Pin == nBefore) != null)
                         pinList.Find(x => x.Pin == nBefore).Used = false;
-                    if (pinList.Find(x => x.Pin == nAfter)!=null)
+                    if (pinList.Find(x => x.Pin == nAfter) != null)
                         pinList.Find(x => x.Pin == nAfter).Used = true;
                 }
             }
@@ -145,5 +144,6 @@ namespace System
             // now confirm assignment of the new value in the configuration data
             currentPin = newPin;
         }
+
     }
 }

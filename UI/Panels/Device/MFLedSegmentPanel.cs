@@ -82,9 +82,10 @@ namespace MobiFlight.UI.Panels.Settings.Device
 
             // First update the one that is changed
             // Here, the config data (ledModule.XXXPin) is updated with the new value read from the changed ComboBox;
-            if (comboBox == mfPin1ComboBox) { ComboBoxHelper.reassignPin(mfPin1ComboBox, pinList, ref ledModule.DinPin); } else
-            if (comboBox == mfPin2ComboBox) { ComboBoxHelper.reassignPin(mfPin2ComboBox, pinList, ref ledModule.ClsPin); } else
-            if (comboBox == mfPin3ComboBox) { ComboBoxHelper.reassignPin(mfPin3ComboBox, pinList, ref ledModule.ClkPin); }
+            var newPin = comboBox.SelectedItem.ToString();
+            if (comboBox == mfPin1ComboBox) { ComboBoxHelper.reassignPin(newPin, pinList, ref ledModule.DinPin); } else
+            if (comboBox == mfPin2ComboBox) { ComboBoxHelper.reassignPin(newPin, pinList, ref ledModule.ClsPin); } else
+            if (comboBox == mfPin3ComboBox) { ComboBoxHelper.reassignPin(newPin, pinList, ref ledModule.ClkPin); }
             // then the others are updated too 
             UpdateFreePinsInDropDowns();
 
