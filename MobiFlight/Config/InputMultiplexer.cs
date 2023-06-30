@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace MobiFlight.Config
@@ -18,6 +19,8 @@ namespace MobiFlight.Config
         public String DataPin = "-1";
         [XmlAttribute]
         public String NumBytes = "2"; // defaults to CD4067
+
+        public List<MobiFlightPin> pinList;
 
         public InputMultiplexer()
         {
@@ -38,8 +41,6 @@ namespace MobiFlight.Config
         {
             Selector = muxSelector;
         }
-
-
 
         override public String ToInternal()
         {
