@@ -83,18 +83,17 @@ namespace System
             
             return false;
         }
-        static public void reassignPin(ComboBox comboBox, List<MobiFlightPin> pinList, ref string signalPin)
+        static public void reassignPin(ComboBox comboBox, List<MobiFlightPin> pinList, ref string currentPin)
         {
-            // This function updates the config data (signalPin) with the new value read from the ComboBox.
-            // At the same time:
-            // - the assignment flags in the "base" pin list are accordingly updated (the current pin no. is marked as free
-            //   and the new one as used)
-            // - an updated pin list is associated to the ComboBox
-            string after = comboBox.SelectedItem.ToString();
-            byte nBefore = byte.Parse(signalPin);
-            byte nAfter = byte.Parse(after);
+            // This function updates the config data (currentPin) with the new value read from the ComboBox.
+            // It does not deal with the ComboBox value set update; this has to be done by the caller.
+            // The assignment flags in the "base" pin list are accordingly updated (the current pin no. 
+            // is marked as free and the new one as used)
+            string newPin = comboBox.SelectedItem.ToString();
+            byte nBefore = byte.Parse(currentPin);
+            byte nAfter = byte.Parse(newPin);
             try {
-                if (signalPin != after) {
+                if (currentPin != newPin) {
                     // Pin 0 is used for the stepper.
                     // But Pin 0 is not a correct Pin for the Mega.
                     if (pinList.Find(x => x.Pin == nBefore)!=null)
@@ -104,14 +103,47 @@ namespace System
                 }
             }
             catch (Exception ex) {
-                Log.Instance.log($"Pin reassignment from {signalPin} to {after} went wrong: {ex.Message}", LogSeverity.Error);
+                Log.Instance.log($"Pin reassignment from {currentPin} to {newPin} went wrong: {ex.Message}", LogSeverity.Error);
             }
             // now confirm assignment of the new value in the configuration data
-            signalPin = after;
-            
-            //ComboBoxHelper.BindMobiFlightFreePins(comboBox, pinList, after);
-            // the function above has rebuilt its datasource, therefore the ComboBox selection must be restored:
-            //comboBox.SelectedValue = nAfter;
+            currentPin = newPin;
+        }
+        static public void freePin(List<MobiFlightPin> pinList, string currentPin)
+        {
+            // This function removes "currentPin" from the free pin list.
+            byte nBefore = byte.Parse(currentPin);
+            try {
+                MobiFlightPin pin = pinList.Find(x => x.Pin == nBefore);
+                if (pin != null)
+                    pin.Used = false;
+            }
+            catch (Exception ex) {
+                Log.Instance.log($"Release of pin {currentPin} went wrong: {ex.Message}", LogSeverity.Error);
+            }
+        }
+        static public void reservePin(List<MobiFlightPin> pinList, string currentPin, ref string newPin)
+        {
+            // This function updates the config data (currentPin) with the new value read from the ComboBox.
+            // It does not deal with the ComboBox value set update; this has to be done by the caller.
+            // The assignment flags in the "base" pin list are accordingly updated (the current pin no. 
+            // is marked as free and the new one as used)
+            byte nBefore = byte.Parse(currentPin);
+            byte nAfter = byte.Parse(newPin);
+            try {
+                if (currentPin != newPin) {
+                    // Pin 0 is used for the stepper.
+                    // But Pin 0 is not a correct Pin for the Mega.
+                    if (pinList.Find(x => x.Pin == nBefore) != null)
+                        pinList.Find(x => x.Pin == nBefore).Used = false;
+                    if (pinList.Find(x => x.Pin == nAfter) != null)
+                        pinList.Find(x => x.Pin == nAfter).Used = true;
+                }
+            }
+            catch (Exception ex) {
+                Log.Instance.log($"Pin assignment from {currentPin} to {newPin} went wrong: {ex.Message}", LogSeverity.Error);
+            }
+            // now confirm assignment of the new value in the configuration data
+            currentPin = newPin;
         }
     }
 }

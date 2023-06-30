@@ -42,6 +42,22 @@ namespace MobiFlight.UI.Panels.Settings.Device
             ComboBoxHelper.SetSelectedItem(mfNumModulesComboBox, ledModule.NumModules);
 
             initialized = true;
+
+            ledModule.ClsPin = "253";
+
+            if (ledModule.ClsPin == "253") {
+                displayLedTypeTM4.Checked = true;
+                mfPin2ComboBox.Text = "-";
+            } else
+            if (ledModule.ClsPin == "254") {
+                displayLedTypeTM4.Checked = true;
+                mfPin2ComboBox.Text = "-";
+            }
+        }
+        
+        private bool isMax()
+        { 
+            return displayLedTypeMAX.Checked == true; 
         }
         private void setNonPinValues()
         {
@@ -82,6 +98,30 @@ namespace MobiFlight.UI.Panels.Settings.Device
             setNonPinValues();
             if (Changed != null)
                 Changed(ledModule, new EventArgs());
+        }
+
+        private void displayLedTypeMAX_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!initialized) return;
+            if (!(sender as RadioButton).Checked) return;
+            mfPin2ComboBox.Enabled = true;
+            mfNumModulesComboBox.Enabled = true;
+        }
+
+        private void displayLedTypeTM4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!initialized) return;
+            if (!(sender as RadioButton).Checked) return;
+            mfPin2ComboBox.Enabled = false;
+            mfNumModulesComboBox.Enabled = false;
+        }
+
+        private void displayLedTypeTM6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!initialized) return;
+            if (!(sender as RadioButton).Checked) return;
+            mfPin2ComboBox.Enabled = false;
+            mfNumModulesComboBox.Enabled = false;
         }
     }
 }
