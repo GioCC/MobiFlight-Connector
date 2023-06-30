@@ -1,0 +1,2 @@
+UI\Panels\Output\DisplayLedDisplayPanel.cs
+DisplayLedDisplayPanel.syncFromConfig(OutputConfigItem config)

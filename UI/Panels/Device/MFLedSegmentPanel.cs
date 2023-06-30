@@ -34,25 +34,27 @@ namespace MobiFlight.UI.Panels.Settings.Device
                             // for the lifetime of the panel.
 
             this.ledModule = ledModule;
-
-            UpdateFreePinsInDropDowns();
-
             textBox1.Text = ledModule.Name;
             mfIntensityTrackBar.Value = ledModule.Brightness;
             ComboBoxHelper.SetSelectedItem(mfNumModulesComboBox, ledModule.NumModules);
 
-            initialized = true;
-
-            ledModule.ClsPin = "253";
+            ledModule.ClsPin = "253";   //TEST
 
             if (ledModule.ClsPin == "253") {
                 displayLedTypeTM4.Checked = true;
-                mfPin2ComboBox.Text = "-";
             } else
             if (ledModule.ClsPin == "254") {
-                displayLedTypeTM4.Checked = true;
-                mfPin2ComboBox.Text = "-";
+                displayLedTypeTM6.Checked = true;
+            } else {
+                displayLedTypeMAX.Checked = true;
             }
+            
+            if(isMax()) {
+            }
+
+            UpdateFreePinsInDropDowns();
+
+            initialized = true;
         }
         
         private bool isMax()
@@ -63,15 +65,34 @@ namespace MobiFlight.UI.Panels.Settings.Device
         {
             ledModule.Name = textBox1.Text;
             ledModule.Brightness = (byte)(mfIntensityTrackBar.Value);
-            ledModule.NumModules = mfNumModulesComboBox.Text;
+            ledModule.NumModules = isMax()? mfNumModulesComboBox.Text : "1";
+        }
+        private void setMAXMode(bool MAXmode)
+        {
+            mfPin2ComboBox.Visible = MAXmode;
+            mfNumModulesComboBox.Visible = MAXmode;
+            mfPin2Label.Visible = MAXmode;
+            numberOfModulesLabel.Visible = MAXmode;
+            if(MAXmode) {
+                // First try and see if the "old" pin is still available,
+                // otherwise assign the first free one
+                ComboBoxHelper.reservePin(pinList, ref ledModule.ClsPin);
+            } else {
+                ComboBoxHelper.freePin(pinList, ledModule.ClsPin);
+            }
         }
         private void UpdateFreePinsInDropDowns()
         {
             bool exInitialized = initialized;
             initialized = false;    // inhibit value_Changed events
             ComboBoxHelper.BindMobiFlightFreePins(mfPin1ComboBox, pinList, ledModule.DinPin);
-            ComboBoxHelper.BindMobiFlightFreePins(mfPin2ComboBox, pinList, ledModule.ClsPin);
             ComboBoxHelper.BindMobiFlightFreePins(mfPin3ComboBox, pinList, ledModule.ClkPin);
+            if(isMax()) {
+                ComboBoxHelper.BindMobiFlightFreePins(mfPin2ComboBox, pinList, ledModule.ClsPin);
+            } else {
+                // When a TM, leave the value set unaltered (it's inaccessible anyway)
+                // to allow retrieving the previous value upon return to MAX
+            }
             initialized = exInitialized;
         }
 
@@ -103,26 +124,22 @@ namespace MobiFlight.UI.Panels.Settings.Device
 
         private void displayLedTypeMAX_CheckedChanged(object sender, EventArgs e)
         {
-            if (!initialized) return;
             if (!(sender as RadioButton).Checked) return;
-            mfPin2ComboBox.Enabled = true;
-            mfNumModulesComboBox.Enabled = true;
+            // Retrieve previous pin and try to reinstate it
+            ledModule.ClsPin = mfPin2ComboBox.SelectedItem.ToString(); 
+            setMAXMode(true);
         }
-
         private void displayLedTypeTM4_CheckedChanged(object sender, EventArgs e)
         {
-            if (!initialized) return;
             if (!(sender as RadioButton).Checked) return;
-            mfPin2ComboBox.Enabled = false;
-            mfNumModulesComboBox.Enabled = false;
+            setMAXMode(false);
+            ledModule.ClsPin = "253";
         }
-
         private void displayLedTypeTM6_CheckedChanged(object sender, EventArgs e)
         {
-            if (!initialized) return;
             if (!(sender as RadioButton).Checked) return;
-            mfPin2ComboBox.Enabled = false;
-            mfNumModulesComboBox.Enabled = false;
+            setMAXMode(false);
+            ledModule.ClsPin = "254";
         }
     }
 }
