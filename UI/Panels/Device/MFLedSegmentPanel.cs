@@ -49,9 +49,6 @@ namespace MobiFlight.UI.Panels.Settings.Device
                 displayLedTypeMAX.Checked = true;
             }
             
-            if(isMax()) {
-            }
-
             UpdateFreePinsInDropDowns();
 
             initialized = true;
