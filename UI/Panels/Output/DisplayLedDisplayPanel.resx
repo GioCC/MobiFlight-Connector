@@ -1261,7 +1261,7 @@
     <value>3</value>
   </data>
   <data name="displayLedGroupFlowLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 92</value>
+    <value>0, 39</value>
   </data>
   <data name="displayLedGroupFlowLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1270,7 +1270,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="displayLedGroupFlowLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 110</value>
+    <value>339, 108</value>
   </data>
   <data name="displayLedGroupFlowLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>74</value>
@@ -1288,7 +1288,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;displayLedGroupFlowLayoutPanel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="brightnessDropDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1452,7 +1452,7 @@ Zero (0) turns the display off, e.g. cold &amp;&amp; dark without power. 15 is f
     <value>2</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 207</value>
+    <value>0, 152</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>339, 147</value>
@@ -1473,7 +1473,7 @@ Zero (0) turns the display off, e.g. cold &amp;&amp; dark without power. 15 is f
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -1500,118 +1500,7 @@ Zero (0) turns the display off, e.g. cold &amp;&amp; dark without power. 15 is f
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="displayLedTypeTM6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="displayLedTypeTM6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="displayLedTypeTM6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 19</value>
-  </data>
-  <data name="displayLedTypeTM6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 17</value>
-  </data>
-  <data name="displayLedTypeTM6.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="displayLedTypeTM6.Text" xml:space="preserve">
-    <value>TM1637-6 digit</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeTM6.Name" xml:space="preserve">
-    <value>displayLedTypeTM6</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeTM6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeTM6.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeTM6.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="displayLedTypeTM4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="displayLedTypeTM4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="displayLedTypeTM4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 19</value>
-  </data>
-  <data name="displayLedTypeTM4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 17</value>
-  </data>
-  <data name="displayLedTypeTM4.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="displayLedTypeTM4.Text" xml:space="preserve">
-    <value>TM1637-4 digit</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeTM4.Name" xml:space="preserve">
-    <value>displayLedTypeTM4</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeTM4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeTM4.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeTM4.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="displayLedTypeMAX.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="displayLedTypeMAX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 19</value>
-  </data>
-  <data name="displayLedTypeMAX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 17</value>
-  </data>
-  <data name="displayLedTypeMAX.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="displayLedTypeMAX.Text" xml:space="preserve">
-    <value>MAX72xx</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeMAX.Name" xml:space="preserve">
-    <value>displayLedTypeMAX</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeMAX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeMAX.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;displayLedTypeMAX.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 40</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 47</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>76</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1620,7 +1509,7 @@ Zero (0) turns the display off, e.g. cold &amp;&amp; dark without power. 15 is f
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 356</value>
+    <value>339, 302</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DisplayLedDisplayPanel</value>

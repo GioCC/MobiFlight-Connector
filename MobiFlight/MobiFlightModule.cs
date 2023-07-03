@@ -343,11 +343,19 @@ namespace MobiFlight
                             }
 
                             device.Name = GenerateUniqueDeviceName(ledModules.Keys.ToArray(), device.Name);
+                            var dev = device as Config.LedModule;
+                            
+                            MobiFlightLedModule.ModelType model = MobiFlightLedModule.ModelType.MAX72xx;
+                            if (dev.ClsPin == LedModule.MODEL_TM1637_4D) model = MobiFlightLedModule.ModelType.TM1637_4D;
+                            else 
+                            if (dev.ClsPin == LedModule.MODEL_TM1637_6D) model = MobiFlightLedModule.ModelType.TM1637_6D;
+                            
                             ledModules.Add(device.Name, new MobiFlightLedModule()
                             {
                                 CmdMessenger = _cmdMessenger,
                                 Name = device.Name,
                                 ModuleNumber = ledModules.Count,
+                                Model = model,
                                 SubModules = ledSubmodules,
                                 Brightness = (device as Config.LedModule).Brightness
                             });

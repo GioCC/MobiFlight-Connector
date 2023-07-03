@@ -75,17 +75,12 @@
             this.BrightnessReferenceHintLabel = new System.Windows.Forms.Label();
             this.ReverseDigitsLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.displayLedTypeTM6 = new System.Windows.Forms.RadioButton();
-            this.displayLedTypeTM4 = new System.Windows.Forms.RadioButton();
-            this.displayLedTypeMAX = new System.Windows.Forms.RadioButton();
             this.displayLedDecimalPointFlowLayoutPanel.SuspendLayout();
             this.displayLedDigitFlowLayoutPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.displayLedGroupFlowLayoutPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // displayLedDigit7CheckBox
@@ -428,40 +423,10 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.displayLedTypeTM6);
-            this.groupBox2.Controls.Add(this.displayLedTypeTM4);
-            this.groupBox2.Controls.Add(this.displayLedTypeMAX);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
-            // 
-            // displayLedTypeTM6
-            // 
-            resources.ApplyResources(this.displayLedTypeTM6, "displayLedTypeTM6");
-            this.displayLedTypeTM6.Name = "displayLedTypeTM6";
-            this.displayLedTypeTM6.UseVisualStyleBackColor = true;
-            // 
-            // displayLedTypeTM4
-            // 
-            resources.ApplyResources(this.displayLedTypeTM4, "displayLedTypeTM4");
-            this.displayLedTypeTM4.Name = "displayLedTypeTM4";
-            this.displayLedTypeTM4.UseVisualStyleBackColor = true;
-            // 
-            // displayLedTypeMAX
-            // 
-            resources.ApplyResources(this.displayLedTypeMAX, "displayLedTypeMAX");
-            this.displayLedTypeMAX.Checked = true;
-            this.displayLedTypeMAX.Name = "displayLedTypeMAX";
-            this.displayLedTypeMAX.TabStop = true;
-            this.displayLedTypeMAX.UseVisualStyleBackColor = true;
-            // 
             // DisplayLedDisplayPanel
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.displayLedGroupFlowLayoutPanel);
             this.Controls.Add(this.panel1);
@@ -478,8 +443,6 @@
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -532,9 +495,5 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label BrightnessReferenceHintLabel;
         public System.Windows.Forms.Label ReverseDigitHintLabel;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton displayLedTypeTM6;
-        private System.Windows.Forms.RadioButton displayLedTypeTM4;
-        private System.Windows.Forms.RadioButton displayLedTypeMAX;
     }
 }

@@ -91,14 +91,24 @@ namespace MobiFlight.UI.Panels
 
         public void SetConnectors(List<ListItem> pins)
         {
-            displayLedConnectorComboBox.DataSource = new List<ListItem>(pins);
-            displayLedConnectorComboBox.DisplayMember = "Label";
-            displayLedConnectorComboBox.ValueMember = "Value";
-
+            ComboBox cb = displayLedConnectorComboBox;
+            cb.DataSource = new List<ListItem>(pins);
+            cb.DisplayMember = "Label";
+            cb.ValueMember = "Value";
             if (pins.Count > 0)
-                displayLedConnectorComboBox.SelectedIndex = 0;
+                cb.SelectedIndex = 0;
+            cb.Enabled = pins.Count > 0;
+        }
 
-            displayLedConnectorComboBox.Enabled = pins.Count > 0;
+        public void SetSizeDigits(List<ListItem> entries)
+        {
+            ComboBox cb = displayLedModuleSizeComboBox;
+            cb.DataSource = new List<ListItem>(entries);
+            cb.DisplayMember = "Label";
+            cb.ValueMember = "Value";
+            if (entries.Count > 0)
+                cb.SelectedIndex = 0;
+            cb.Enabled = entries.Count > 0;
         }
 
         private void DisplayLedModuleSize_SelectedIndexChanged(object sender, EventArgs e)

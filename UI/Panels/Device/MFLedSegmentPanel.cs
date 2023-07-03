@@ -38,16 +38,12 @@ namespace MobiFlight.UI.Panels.Settings.Device
             mfIntensityTrackBar.Value = ledModule.Brightness;
             ComboBoxHelper.SetSelectedItem(mfNumModulesComboBox, ledModule.NumModules);
 
-            ledModule.ClsPin = "253";   //TEST
+            ledModule.ClsPin = MobiFlight.Config.LedModule.MODEL_TM1637_4D;   //TEST
 
-            if (ledModule.ClsPin == "253") {
-                displayLedTypeTM4.Checked = true;
-            } else
-            if (ledModule.ClsPin == "254") {
-                displayLedTypeTM6.Checked = true;
-            } else {
-                displayLedTypeMAX.Checked = true;
-            }
+            displayLedTypeMAX.Checked = true;
+            if (ledModule.ClsPin == MobiFlight.Config.LedModule.MODEL_TM1637_4D) { displayLedTypeTM4.Checked = true; }
+            else
+            if (ledModule.ClsPin == MobiFlight.Config.LedModule.MODEL_TM1637_6D) { displayLedTypeTM6.Checked = true; }
             
             UpdateFreePinsInDropDowns();
 
