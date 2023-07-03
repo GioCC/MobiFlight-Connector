@@ -114,7 +114,9 @@ namespace MobiFlight.UI.Panels.Settings.Device
         private void value_Changed(object sender, EventArgs e)
         {
             if (!initialized) return;
-            ReassignFreePinsInDropDowns(sender as ComboBox);
+            if(sender == mfPin1ComboBox || sender == mfPin2ComboBox || sender == mfPin3ComboBox) { 
+                ReassignFreePinsInDropDowns(sender as ComboBox);
+            }
             setNonPinValues();
             if (Changed != null)
                 Changed(ledModule, new EventArgs());
