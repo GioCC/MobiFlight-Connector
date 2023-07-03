@@ -97,7 +97,7 @@ namespace MobiFlight.UI.Panels
             cb.ValueMember = "Value";
             if (pins.Count > 0)
                 cb.SelectedIndex = 0;
-            cb.Enabled = pins.Count > 0;
+            cb.Enabled = pins.Count > 1;
         }
 
         public void SetSizeDigits(List<ListItem> entries)
@@ -107,8 +107,8 @@ namespace MobiFlight.UI.Panels
             cb.DisplayMember = "Label";
             cb.ValueMember = "Value";
             if (entries.Count > 0)
-                cb.SelectedIndex = 0;
-            cb.Enabled = entries.Count > 0;
+                cb.SelectedIndex = entries.Count-1;
+            cb.Enabled = entries.Count > 1;
         }
 
         private void DisplayLedModuleSize_SelectedIndexChanged(object sender, EventArgs e)

@@ -1263,7 +1263,9 @@ namespace MobiFlight
                 {
                     case DeviceType.LedModule:
                         usedPins.Add(Convert.ToByte((device as LedModule).ClkPin));
-                        usedPins.Add(Convert.ToByte((device as LedModule).ClsPin));
+                        var clsPin = (device as LedModule).ClsPin;
+                        if(clsPin != LedModule.MODEL_TM1637_4D && clsPin != LedModule.MODEL_TM1637_6D)
+                        usedPins.Add(Convert.ToByte(clsPin));
                         usedPins.Add(Convert.ToByte((device as LedModule).DinPin));
                         break;
 
@@ -1348,7 +1350,8 @@ namespace MobiFlight
             }
 
             // Mark all the used pins as used in the result list.
-            usedPins.ForEach(pin => ResultPins.Find(resultPin => resultPin.Pin == pin).Used = true);
+            //usedPins = new HashSet<byte>(usedPins).ToList();
+            usedPins.ForEach(pin => (ResultPins.Find(resultPin => resultPin.Pin == pin)).Used = true); 
 
             if (FreeOnly)
                 ResultPins = ResultPins.FindAll(x => x.Used == false);

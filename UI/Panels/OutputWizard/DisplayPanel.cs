@@ -700,7 +700,7 @@ namespace MobiFlight.UI.Panels.OutputWizard
                 else 
                 if (dev.Model == MobiFlightLedModule.ModelType.TM1637_6D) { maxdigits = 6; }
 
-                for (int i = 2; i <= maxdigits; i++)
+                for (int i = 2; i < maxdigits; i++)
                 {
                     entries.Add(new ListItem() { Label = (i + 1).ToString(), Value = (i + 1).ToString() });
                 }
