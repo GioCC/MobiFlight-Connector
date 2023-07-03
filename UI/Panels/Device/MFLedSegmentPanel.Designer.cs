@@ -215,42 +215,42 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.mfIntensityGroupBox);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox3);
             this.Name = "MFLedSegmentPanel";
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.mfIntensityGroupBox.ResumeLayout(false);
             this.mfIntensityGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mfIntensityTrackBar)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox mfIntensityGroupBox;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label mfPin1Label;
         private System.Windows.Forms.ComboBox mfPin1ComboBox;
         private System.Windows.Forms.Label mfPin2Label;
         private System.Windows.Forms.ComboBox mfPin2ComboBox;
-        private System.Windows.Forms.GroupBox mfIntensityGroupBox;
         private System.Windows.Forms.TrackBar mfIntensityTrackBar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label mfPin3Label;
         private System.Windows.Forms.ComboBox mfPin3ComboBox;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label numberOfModulesLabel;
         private System.Windows.Forms.ComboBox mfNumModulesComboBox;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton displayLedTypeTM6;
         private System.Windows.Forms.RadioButton displayLedTypeTM4;
         private System.Windows.Forms.RadioButton displayLedTypeMAX;

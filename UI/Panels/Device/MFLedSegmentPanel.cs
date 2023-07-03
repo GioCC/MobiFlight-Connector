@@ -67,7 +67,8 @@ namespace MobiFlight.UI.Panels.Settings.Device
             mfNumModulesComboBox.Visible = MAXmode;
             mfPin2Label.Visible = MAXmode;
             numberOfModulesLabel.Visible = MAXmode;
-            if(MAXmode) {
+            label3.Visible = MAXmode;
+            if (MAXmode) {
                 // First try and see if the "old" pin is still available,
                 // otherwise assign the first free one
                 ComboBoxHelper.reservePin(pinList, ref ledModule.ClsPin);
