@@ -64,12 +64,12 @@ namespace System
             if (Pins == null) return false;
             // Deep-clone list as 'Used' list
             List<MobiFlightPin> UsablePins = Pins.ConvertAll(pin => new MobiFlightPin(pin));
-            // Mark current pin as free
-            if (UsablePins.Exists(x => x.Pin == byte.Parse(CurrentPin)))
+            // Mark current pin (if any specified) as free
+            if (CurrentPin != "" && UsablePins.Exists(x => x.Pin == byte.Parse(CurrentPin))) {
                 UsablePins.Find(x => x.Pin == byte.Parse(CurrentPin)).Used = false;
+            }
 
-            if (analogOnly == true)
-            {
+            if (analogOnly == true) {
                 UsablePins = UsablePins.FindAll(x => x.isAnalog == true);
             }
 
@@ -78,54 +78,30 @@ namespace System
             comboBox.DisplayMember = "Name";
             comboBox.ValueMember = "Pin";
 
-            // Restore the original item selection
-            var pinNo = byte.Parse(CurrentPin);
-
-            try {
-                comboBox.SelectedValue = pinNo;
+            // Restore the original item selection (if any)
+            if (CurrentPin != "") {
+                var pinNo = byte.Parse(CurrentPin);
+                try {
+                    comboBox.SelectedValue = pinNo;
+                }
+                catch { }
             }
-            catch { }
             
             return false;
         }
-        static public void reassignPin(string newPin, List<MobiFlightPin> pinList, ref string currentPin)
-        {
-            // This function updates the config data (currentPin) with the new value passed.
-            // It does not deal with the ComboBox value set update; this has to be done by the caller.
-            // The assignment flags in the "base" pin list are accordingly updated (the current pin no. 
-            // is marked as free and the new one as used)
-            try {
-                byte nBefore = byte.Parse(currentPin);
-                byte nAfter = byte.Parse(newPin);
-                if (currentPin != newPin) {
-                    // Pin 0 is used for the stepper; but Pin 0 is not a correct Pin for the Mega. (?)
-                    MobiFlightPin p;
-                    p = pinList.Find(x => x.Pin == nBefore);
-                    if (p != null) p.Used = false;
-                    p = pinList.Find(x => x.Pin == nAfter);
-                    if (p != null) p.Used = true;
-                }
-            }
-            catch (Exception ex) {
-                Log.Instance.log($"Pin reassignment from {currentPin} to {newPin} went wrong: {ex.Message}", LogSeverity.Error);
-            }
-            // now confirm assignment of the new value in the configuration data
-            currentPin = newPin;
-        }
         static public void freePin(List<MobiFlightPin> pinList, string currentPin)
         {
-            // This function removes "currentPin" from the free pin list.
             byte nBefore = byte.Parse(currentPin);
             try {
-                MobiFlightPin pin = pinList.Find(x => x.Pin == nBefore);
-                if (pin != null)
-                    pin.Used = false;
+                MobiFlightPin p;
+                p = pinList.Find(x => x.Pin == nBefore);
+                if (p != null) p.Used = false;
             }
             catch (Exception ex) {
                 Log.Instance.log($"Release of pin {currentPin} went wrong: {ex.Message}", LogSeverity.Error);
             }
         }
-        static public void reservePin(List<MobiFlightPin> pinList, ref string newPin)
+        static public void assignPin(List<MobiFlightPin> pinList, ref string newPin)
         {
             // This function tries to reserve the specified pin as newly occupied.
             // If it is no longer available (or ""), the first free one will be assigned.
@@ -133,17 +109,19 @@ namespace System
             try {
                 MobiFlightPin p = null;
                 if (newPin != "") {
+                    // A desired pin is specified: seek it
                     byte newPinNo = byte.Parse(newPin);
                     p = pinList.Find(x => x.Pin == newPinNo);
                     if (p == null) throw new Exception("Nonexistent pin number");
                 }
-                if (p != null && !p.Used) {
-                    p.Used = true;
-                    newPin = p.Pin.ToString();
-                } else {
+                if (newPin == "" || p.Used) {
+                    // Either no desired pin is specified, or desired pin is not available:
+                    // assign first free one
                     p = pinList.Find(x => x.Used == false);
-                    if(p == null)  throw new ArgumentOutOfRangeException();
+                    // If no pin free, raise error
+                    if(p == null) throw new ArgumentOutOfRangeException();
                 }
+                p.Used = true;
                 newPin = p.Pin.ToString();
             }
             catch (ArgumentOutOfRangeException ex) {
@@ -155,6 +133,25 @@ namespace System
             catch (Exception ex) {
                 Log.Instance.log($"Pin assignment to {newPin} went wrong: {ex.Message}", LogSeverity.Error);
             }
+        }
+        static public void reassignPin(string newPin, List<MobiFlightPin> pinList, ref string currentPin)
+        {
+            // This function updates the config data (currentPin) with the new value passed.
+            // The assignment flags in the "base" pin list are accordingly updated
+            // (the current pin is marked as free and the new one as used)
+            try {
+                if (currentPin == newPin) return;
+                freePin(pinList, currentPin);
+                // Temporarily assign desired target - will remain this if available
+                string newCurrentPin = newPin;
+                assignPin(pinList, ref newCurrentPin);
+                // If no errors, confirm assignment of the new value in the configuration data
+                currentPin = newCurrentPin;
+            }
+            catch (Exception ex) {
+                Log.Instance.log($"Pin reassignment from {currentPin} to {newPin} went wrong: {ex.Message}", LogSeverity.Error);
+            }
+
         }
 
     }

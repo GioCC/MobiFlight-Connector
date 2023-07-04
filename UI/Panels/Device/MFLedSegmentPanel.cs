@@ -14,6 +14,7 @@ namespace MobiFlight.UI.Panels.Settings.Device
         private MobiFlight.Config.LedModule ledModule;
         private List<MobiFlightPin> pinList;    // COMPLETE list of pins (includes status)
         private bool initialized = false;
+        private string exMAXClsPin = "";
         
         public event EventHandler Changed;
 
@@ -50,11 +51,6 @@ namespace MobiFlight.UI.Panels.Settings.Device
                     break;
             }
 
-            //displayLedTypeMAX.Checked = true;
-            //if (ledModule.ClsPin == MobiFlight.Config.LedModule.MODEL_TM1637_4D) { displayLedTypeTM4.Checked = true; }
-            //else
-            //if (ledModule.ClsPin == MobiFlight.Config.LedModule.MODEL_TM1637_6D) { displayLedTypeTM6.Checked = true; }
-            
             UpdateFreePinsInDropDowns();
 
             initialized = true;
@@ -62,7 +58,6 @@ namespace MobiFlight.UI.Panels.Settings.Device
         
         private bool isMax()
         { 
-            //return displayLedTypeMAX.Checked == true; 
             return mfDisplayTypeComboBox.SelectedIndex == 0; 
         }
         private void setNonPinValues()
@@ -86,17 +81,18 @@ namespace MobiFlight.UI.Panels.Settings.Device
             var MAXmode = (mode == MobiFlight.Config.LedModule.MODEL_MAX72xx);
             if (MAXmode) {
                 // First try and see if the "old" pin is still available, otherwise assign the first free one
-                if (mfPin2ComboBox.SelectedIndex == -1) {
-                    mfPin2ComboBox.SelectedIndex = 0;
-                    ReassignFreePinsInDropDowns(mfPin2ComboBox);
-                }
-                ledModule.ClsPin = mfPin2ComboBox.SelectedItem.ToString();
-                ComboBoxHelper.reservePin(pinList, ref ledModule.ClsPin);
+                ledModule.ClsPin = ((exMAXClsPin != "") ? exMAXClsPin : "");
+                ComboBoxHelper.assignPin(pinList, ref ledModule.ClsPin);
+                UpdateFreePinsInDropDowns();
             } else {
+                if(exMAXClsPin == "") exMAXClsPin = ledModule.ClsPin;
+                // "freePin()" is the first half part only of "ReassignFreePinsInDropDowns()"
                 ComboBoxHelper.freePin(pinList, ledModule.ClsPin);
+                // Make sure to use a neutral value
+                ledModule.ClsPin = "";
+                UpdateFreePinsInDropDowns();
+                // Now replace it with the special marker
                 ledModule.ClsPin = mode;
-                ReassignFreePinsInDropDowns(mfPin2ComboBox);
-                // UpdateFreePinsInDropDowns();
             }
             if (Changed != null)
                 Changed(ledModule, new EventArgs());
@@ -106,8 +102,8 @@ namespace MobiFlight.UI.Panels.Settings.Device
             bool exInitialized = initialized;
             initialized = false;    // inhibit value_Changed events
             ComboBoxHelper.BindMobiFlightFreePins(mfPin1ComboBox, pinList, ledModule.DinPin);
+            if(isMax()) ComboBoxHelper.BindMobiFlightFreePins(mfPin2ComboBox, pinList, ledModule.ClsPin);
             ComboBoxHelper.BindMobiFlightFreePins(mfPin3ComboBox, pinList, ledModule.ClkPin);
-            ComboBoxHelper.BindMobiFlightFreePins(mfPin2ComboBox, pinList, ledModule.ClsPin);
             initialized = exInitialized;
         }
 
@@ -137,24 +133,6 @@ namespace MobiFlight.UI.Panels.Settings.Device
             setNonPinValues();
             if (Changed != null)
                 Changed(ledModule, new EventArgs());
-        }
-
-        private void displayLedTypeMAX_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (!(sender as RadioButton).Checked) return;
-            //// Retrieve previous pin and try to reinstate it
-            //ledModule.ClsPin = mfPin2ComboBox.SelectedItem.ToString(); 
-            //setMAXMode(MobiFlight.Config.LedModule.MODEL_MAX72xx);
-        }
-        private void displayLedTypeTM4_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (!(sender as RadioButton).Checked) return;
-            //setMAXMode(MobiFlight.Config.LedModule.MODEL_TM1637_4D);
-        }
-        private void displayLedTypeTM6_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (!(sender as RadioButton).Checked) return;
-            //setMAXMode(MobiFlight.Config.LedModule.MODEL_TM1637_6D);
         }
 
         private void mfDisplayTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
