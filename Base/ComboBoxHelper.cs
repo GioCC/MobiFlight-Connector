@@ -79,7 +79,12 @@ namespace System
             comboBox.ValueMember = "Pin";
 
             // Restore the original item selection
-            comboBox.SelectedValue = byte.Parse(CurrentPin);
+            var pinNo = byte.Parse(CurrentPin);
+
+            try {
+                comboBox.SelectedValue = pinNo;
+            }
+            catch { }
             
             return false;
         }

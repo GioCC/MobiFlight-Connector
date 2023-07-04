@@ -46,9 +46,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.displayLedTypeTM6 = new System.Windows.Forms.RadioButton();
-            this.displayLedTypeTM4 = new System.Windows.Forms.RadioButton();
-            this.displayLedTypeMAX = new System.Windows.Forms.RadioButton();
+            this.mfDisplayTypeComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.mfIntensityGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mfIntensityTrackBar)).BeginInit();
@@ -181,35 +179,22 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.displayLedTypeTM6);
-            this.groupBox3.Controls.Add(this.displayLedTypeTM4);
-            this.groupBox3.Controls.Add(this.displayLedTypeMAX);
+            this.groupBox3.Controls.Add(this.mfDisplayTypeComboBox);
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
-            // displayLedTypeTM6
+            // mfDisplayTypeComboBox
             // 
-            resources.ApplyResources(this.displayLedTypeTM6, "displayLedTypeTM6");
-            this.displayLedTypeTM6.Name = "displayLedTypeTM6";
-            this.displayLedTypeTM6.UseVisualStyleBackColor = true;
-            this.displayLedTypeTM6.CheckedChanged += new System.EventHandler(this.displayLedTypeTM6_CheckedChanged);
-            // 
-            // displayLedTypeTM4
-            // 
-            resources.ApplyResources(this.displayLedTypeTM4, "displayLedTypeTM4");
-            this.displayLedTypeTM4.Name = "displayLedTypeTM4";
-            this.displayLedTypeTM4.UseVisualStyleBackColor = true;
-            this.displayLedTypeTM4.CheckedChanged += new System.EventHandler(this.displayLedTypeTM4_CheckedChanged);
-            // 
-            // displayLedTypeMAX
-            // 
-            resources.ApplyResources(this.displayLedTypeMAX, "displayLedTypeMAX");
-            this.displayLedTypeMAX.Checked = true;
-            this.displayLedTypeMAX.Name = "displayLedTypeMAX";
-            this.displayLedTypeMAX.TabStop = true;
-            this.displayLedTypeMAX.UseVisualStyleBackColor = true;
-            this.displayLedTypeMAX.CheckedChanged += new System.EventHandler(this.displayLedTypeMAX_CheckedChanged);
+            this.mfDisplayTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mfDisplayTypeComboBox.FormattingEnabled = true;
+            this.mfDisplayTypeComboBox.Items.AddRange(new object[] {
+            resources.GetString("mfDisplayTypeComboBox.Items"),
+            resources.GetString("mfDisplayTypeComboBox.Items1"),
+            resources.GetString("mfDisplayTypeComboBox.Items2")});
+            resources.ApplyResources(this.mfDisplayTypeComboBox, "mfDisplayTypeComboBox");
+            this.mfDisplayTypeComboBox.Name = "mfDisplayTypeComboBox";
+            this.mfDisplayTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.mfDisplayTypeComboBox_SelectedIndexChanged);
             // 
             // MFLedSegmentPanel
             // 
@@ -220,14 +205,13 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.Name = "MFLedSegmentPanel";
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.mfIntensityGroupBox.ResumeLayout(false);
             this.mfIntensityGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mfIntensityTrackBar)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -251,8 +235,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label numberOfModulesLabel;
         private System.Windows.Forms.ComboBox mfNumModulesComboBox;
-        private System.Windows.Forms.RadioButton displayLedTypeTM6;
-        private System.Windows.Forms.RadioButton displayLedTypeTM4;
-        private System.Windows.Forms.RadioButton displayLedTypeMAX;
+        private System.Windows.Forms.ComboBox mfDisplayTypeComboBox;
     }
 }
